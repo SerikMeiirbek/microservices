@@ -1,12 +1,14 @@
 package com.amigoscode.customer.service;
 
-import com.amigoscode.customer.FraudCheckResponse;
+import com.amigoscode.clients.fraud.FraudCheckResponse;
+import com.amigoscode.clients.fraud.FraudClient;
+import com.amigoscode.clients.notification.NotificationClient;
+import com.amigoscode.clients.notification.NotificationRequest;
 import com.amigoscode.customer.model.Customer;
 import com.amigoscode.customer.repository.CustomerRepository;
 import com.amigoscode.customer.request.CustomerRegistrationRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -14,7 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomerService {
     private final CustomerRepository customerRepository;
-    private final RestTemplate restTemplate;
+    private final FraudClient fraudClient;
+    private final NotificationClient notificationClient;
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
                 .firstName(request.firstName())
@@ -28,13 +31,14 @@ public class CustomerService {
         customerRepository.saveAndFlush(customer);
 
         //todo: check if fraudster
-        FraudCheckResponse fraudCheckResponse = restTemplate.getForObject(
+//        FraudCheckResponse fraudCheckResponse = restTemplate.getForObject(
 //                "http://localhost:8081/api/v1/fraud-check/{customerId}",
-                "http://FRAUD/api/v1/fraud-check/{customerId}",
-                FraudCheckResponse.class,
-                customer.getId()
-        );
+//                "http://FRAUD/api/v1/fraud-check/{customerId}", use this for eureka service
+//                FraudCheckResponse.class,
+//                customer.getId()
+//        );
 
+        FraudCheckResponse fraudCheckResponse = fraudClient.isFraudster(customer.getId());
 
 
 
@@ -43,6 +47,15 @@ public class CustomerService {
         }
 
         //todo: send notification
+        notificationClient.sendNotification(
+                new NotificationRequest(
+                        customer.getId(),
+                        customer.getEmail(),
+                        String.format("Hi %s, welcome to Amigoscode...", customer.getFirstName())
+                ));
+
+        //todo: make it async. i.e add to queue
+
     }
 
     public List<Customer> getAllCustomers(){

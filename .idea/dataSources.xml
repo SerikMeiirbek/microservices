@@ -15,11 +15,11 @@
       <jdbc-url>jdbc:postgresql://localhost:5435/fraud</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="postgres@localhost [2]" uuid="878b0ff7-ee0f-42b9-b746-036ed8192f0e">
+    <data-source source="LOCAL" name="notification@localhost" uuid="73e99413-7235-40fa-bac7-5a5e3fbcbb2f">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5435/notification</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

@@ -14,7 +14,8 @@
         <module>customer</module>
         <module>fraud</module>
         <module>eureka-server</module>
-        <module>gateway-service</module>
+        <module>clients</module>
+        <module>notification</module>
     </modules>
 
 
