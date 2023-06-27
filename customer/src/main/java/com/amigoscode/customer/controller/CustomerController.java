@@ -18,8 +18,6 @@ public class CustomerController{
     private final CustomerService customerService;
 
 
-//    @CircuitBreaker(name="customer", fallbackMethod = "customerServiceFallBack")
-//    @Retry(name="customer", fallbackMethod = "customerServiceRetryBack")
     @PostMapping()
     public void registerCustomer(@RequestBody CustomerRegistrationRequest customerRegistrationRequest){
         log.info("new customer registration {}", customerRegistrationRequest);
@@ -31,14 +29,5 @@ public class CustomerController{
         log.info("Get all customers log");
         return ResponseEntity.ok(customerService.getAllCustomers());
     }
-
-//    public void customerServiceFallBack(String userName, Exception e){
-//        log.error("exception{}", e.getMessage());
-//    }
-//
-//    public void  customerServiceRetryBack(String userName, Exception e){
-//        log.error("Retried 3 times. User-service is not healthy{}", e.getMessage());
-//    }
-
 
 }
