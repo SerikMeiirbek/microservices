@@ -4,11 +4,10 @@ server:
 spring:
   application:
     name: customer
-
   datasource:
-    username: 'postgres'
-    url: jdbc:postgresql://localhost:5432/customer
-    password: '1234'
+    username: 'amigoscode'
+    password: 'password'
+    url: jdbc:postgresql://localhost:5435/customer
   jpa:
     properties:
       hibernate:
@@ -24,3 +23,57 @@ eureka:
       defaultZone: http://localhost:8761/eureka
     fetch-registry: true
     register-with-eureka: true
+
+
+
+#management:
+#  endpoint:
+#    health:
+#      show-details: "ALWAYS"
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  context-path: http://localhost:${server.port}/actuator
+#
+#
+#info:
+#  application:
+#    name: ${spring.application.name}
+#    description: Ticketing Application
+#    version: '@project.version@'
+#    spring-cloud-version: '@spring-cloud.version@'
+#    spring-boot-version: '@project.parent.version@'
+#
+#
+#resilience4j:
+#  circuitbreaker:
+#    configs:
+#      default:
+#        automaticTransitionFromOpenToHalfOpenEnabled: true
+#        failureRateThreshold: 50
+#        permittedNumberOfCallsInHalfOpenState: 2
+#        slidingWindowSize: 2
+#        waitDurationInOpenState: 10000
+#        slidingWindowType: COUNT_BASED
+#    instances:
+#      user-service:
+#        baseConfig: default
+#        waitDurationInOpenState: 15000
+#      task-service:
+#        baseConfig: default
+#        waitDurationInOpenState: 20000
+#  retry:
+#    configs:
+#      default:
+#        maxAttempts: 3
+#        waitDuration: 200
+#    instances:
+#      user-service:
+#        baseConfig: default
+#  ratelimiter:
+#    instances:
+#      test:
+#        timeout-duration: 5000
+#        limitRefreshPeriod: 5000
+#        limitForPeriod: 1
