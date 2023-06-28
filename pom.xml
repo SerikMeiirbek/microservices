@@ -26,8 +26,8 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <spring.boot.maven.plugin.version>2.5.7</spring.boot.maven.plugin.version>
-        <spring.boot.dependecies.version>2.5.7</spring.boot.dependecies.version>
-        <spring-cloud.version>2020.0.3</spring-cloud.version>
+        <spring.boot.dependencies.version>2.5.7</spring.boot.dependencies.version>
+        <spring.cloud-version>2020.0.3</spring.cloud-version>
         <image>serikmeiirbek/${project.artifactId}:${project.version}</image>
     </properties>
 
@@ -36,14 +36,14 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.dependecies.version}</version>
+                <version>${spring.boot.dependencies.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
+                <version>${spring.cloud-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -67,7 +67,7 @@
     </dependencies>
 
     <build>
-        <pluginManagement>
+        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
@@ -88,16 +88,16 @@
                     <configuration>
                         <from>
                             <image>eclipse-temurin:17@sha256:2b47a8ea946ce1e5365a1562414ed576e378b7b670cadff3fb98ebecf2890cdc</image>
-<!--                            <platforms>-->
-<!--                                <platform>-->
-<!--                                    <architecture>amd64</architecture>-->
-<!--                                    <os>Linux</os>-->
-<!--                                </platform>-->
-<!--                                <platform>-->
-<!--                                    <architecture>arm64</architecture>clea-->
-<!--                                    <os>Linux</os>-->
-<!--                                </platform>-->
-<!--                            </platforms>-->
+                            <platforms>
+                                <platform>
+                                    <architecture>arm64</architecture>
+                                    <os>linux</os>
+                                </platform>
+                                <platform>
+                                    <architecture>amd64</architecture>
+                                    <os>linux</os>
+                                </platform>
+                            </platforms>
                         </from>
                         <to>
                             <tags>

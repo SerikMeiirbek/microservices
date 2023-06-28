@@ -34,6 +34,8 @@ services:
     container_name: zipkin
     ports:
       - "9411:9411"
+    networks:
+      - spring
 
   rabbitmq:
     image: rabbitmq:3.9.11-management-alpine
@@ -42,9 +44,37 @@ services:
       - "5672:5672"
       - "15672:15672"
 
+  eureka-server:
+    image: serikmeiirbek/eureka-server:latest
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    depends_on:
+      - zipkin
+
+  apigw:
+    image: serikmeiirbek/apigw:latest
+    container_name: apigw
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    depends_on:
+      - zipkin
+      - eureka-server
+
+
+
+
 
 #  eureka-server:
-#    image: amigoscode/eureka-server:latest
+#    image: serikmeiirbek/eureka-server:latest
 #    container_name: eureka-server
 #    ports:
 #      - "8761:8761"
@@ -54,8 +84,9 @@ services:
 #      - spring
 #    depends_on:
 #      - zipkin
+#
 #  apigw:
-#    image: amigoscode/apigw:latest
+#    image: serikmeiirbek/apigw:latest
 #    container_name: apigw
 #    ports:
 #      - "8083:8083"
@@ -66,6 +97,8 @@ services:
 #    depends_on:
 #      - zipkin
 #      - eureka-server
+
+
 #  customer:
 #    image: amigoscode/customer:latest
 #    container_name: customer
@@ -111,8 +144,8 @@ services:
 networks:
   postgres:
     driver: bridge
-#  spring:
-#    driver: bridge
+  spring:
+    driver: bridge
 
 volumes:
   postgres:
