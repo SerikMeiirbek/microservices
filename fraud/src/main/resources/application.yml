@@ -24,23 +24,4 @@ eureka:
       defaultZone: http://localhost:8761/eureka
     fetch-registry: true
     register-with-eureka: true
-
-
-#management:
-#  endpoint:
-#    health:
-#      show-details: "ALWAYS"
-#  endpoints:
-#    web:
-#      exposure:
-#        include: "*"
-#  context-path: http://localhost:${server.port}/actuator
-
-
-#info:
-#  application:
-#    name: ${spring.application.name}
-#    description: Ticketing Application
-#    version: '@project.version@'
-#    spring-cloud-version: '@spring-cloud.version@'
-#    spring-boot-version: '@project.parent.version@'
+    enabled: false
