@@ -1,0 +1,6 @@
+# microservices
+this is small project on distributed microservice architecture
+
+Microservices
+
+https://user-images.githubusercontent.com/40702606/144061535-7a42e85b-59d6-4f7f-9c35-18a48b49e6de.png![image](https://github.com/SerikMeiirbek/microservices/assets/33642388/602d44f5-106b-45f6-9362-44cecbbe14c5)
