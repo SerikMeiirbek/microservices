@@ -9,7 +9,7 @@ services:
     volumes:
       - postgres:/data/postgres
     ports:
-      - "5439:5432"
+      - "5435:5432"
     networks:
       - postgres
     restart: unless-stopped
@@ -43,6 +43,8 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - spring
 
   eureka-server:
     image: serikmeiirbek/eureka-server:latest
